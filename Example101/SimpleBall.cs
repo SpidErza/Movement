@@ -43,7 +43,7 @@ namespace Movement
 		private void Move(float deltaTime)
 		{
 			// TODO implement
-			// Position.X += 200 * deltaTime;
+			Position.X += 200 * deltaTime;
 		}
 
 		private void BounceEdges()
