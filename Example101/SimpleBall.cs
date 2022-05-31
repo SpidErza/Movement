@@ -23,13 +23,14 @@ namespace Movement
 	class SimpleBall : SpriteNode
 	{
 		// your private fields here
-
+		float speedx = 400f;
+		float speedy = 200f;
 
 		// constructor + call base constructor
 		public SimpleBall() : base("resources/bigball.png")
 		{
 			Position = new Vector2(Settings.ScreenSize.X / 2, Settings.ScreenSize.Y / 4);
-			Color = Color.YELLOW;
+			Color = Color.PURPLE;
 		}
 
 		// Update is called every frame
@@ -43,7 +44,8 @@ namespace Movement
 		private void Move(float deltaTime)
 		{
 			// TODO implement
-			Position.X += 200 * deltaTime;
+			Position.X += speedx * deltaTime;
+			Position.Y += speedy * deltaTime;
 		}
 
 		private void BounceEdges()
@@ -54,9 +56,21 @@ namespace Movement
 			float spr_heigth = TextureSize.Y;
 
 			// TODO implement...
-			if (Position.X > scr_width)
+			if (Position.X > scr_width - spr_width / 2)
 			{
-				// ...
+				speedx *= -1;
+			}
+			if (Position.X < 0 + spr_width / 2)
+			{
+				speedx *= -1;
+			}
+			if (Position.Y > scr_height - spr_heigth / 2)
+			{
+				speedy *= -1;
+			}
+			if (Position.Y < 0 + spr_heigth / 2)
+			{
+				speedy *= -1;
 			}
 		}
 

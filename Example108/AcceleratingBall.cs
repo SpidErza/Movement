@@ -1,3 +1,4 @@
+using System;
 using System.Numerics; // Vector2
 using Raylib_cs; // Color
 
@@ -20,16 +21,21 @@ Methods:
 
 namespace Movement
 {
-	class AcceleratingBall : SpriteNode
+	class AcceleratingBall : MoverNode
 	{
 		// your private fields here (add Velocity, Acceleration, and MaxSpeed)
+
+
 
 
 		// constructor + call base constructor
 		public AcceleratingBall() : base("resources/ball.png")
 		{
 			Position = new Vector2(Settings.ScreenSize.X / 2, Settings.ScreenSize.Y / 4);
-			Color = Color.RED;
+			Color = Color.PURPLE;
+			Velocity = new Vector2(0f, 0f);
+			Acceleration = new Vector2(40f, 30f);
+			maxSpeed = 500f;
 		}
 
 		// Update is called every frame
@@ -37,31 +43,10 @@ namespace Movement
 		{
 			Move(deltaTime);
 			WrapEdges();
+			Console.WriteLine(Velocity.Length());
+			Limit();
 		}
 
 		// your own private methods
-		private void Move(float deltaTime)
-		{
-			// TODO implement
-			// Position += Velocity * deltaTime;
-
-			// accelerate your ball (40, 30) every frame
-			// limit to a maximum speed of 1000 pixels/second
-		}
-
-		private void WrapEdges()
-		{
-			float scr_width = Settings.ScreenSize.X;
-			float scr_height = Settings.ScreenSize.Y;
-			float spr_width = TextureSize.X;
-			float spr_heigth = TextureSize.Y;
-
-			// TODO implement...
-			if (Position.X > scr_width)
-			{
-				// ...
-			}
-		}
-
 	}
 }
