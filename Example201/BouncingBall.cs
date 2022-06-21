@@ -20,7 +20,7 @@ Methods:
 
 namespace Movement
 {
-	class BouncingBall : SpriteNode
+	class BouncingBall : MoverNode
 	{
 		// your private fields here (add Velocity, Acceleration, addForce method)
 
@@ -29,7 +29,7 @@ namespace Movement
 		public BouncingBall() : base("resources/ball.png")
 		{
 			Position = new Vector2(Settings.ScreenSize.X / 6, Settings.ScreenSize.Y / 4);
-			Color = Color.BLUE;
+			Color = Color.PURPLE;
 		}
 
 		// Update is called every frame
@@ -45,31 +45,20 @@ namespace Movement
 			// TODO implement
 			// Position += Velocity * deltaTime;
 
-			Vector2 wind = new Vector2(150.0f, 0.0f);
-			Vector2 gravity = new Vector2(0.0f, 980.0f);
+			Vector2 wind = new Vector2(15.0f, 0.0f);
+			Vector2 gravity = new Vector2(0.0f, 20.0f);
 
 			AddForce(wind);
 			AddForce(gravity);
+
+			Position += Velocity * deltaTime;
+			Velocity += Acceleration;
+			Acceleration = Vector2.Normalize(Acceleration);
 		}
 
-		private void AddForce(Vector2 force)
+		private void addForce(Vector2 force)
 		{
-			// TODO implement
+			Acceleration += force;
 		}
-
-		private void BounceEdges()
-		{
-			float scr_width = Settings.ScreenSize.X;
-			float scr_height = Settings.ScreenSize.Y;
-			float spr_width = TextureSize.X;
-			float spr_heigth = TextureSize.Y;
-
-			// TODO implement...
-			if (Position.X > scr_width)
-			{
-				// ...
-			}
-		}
-
 	}
 }
