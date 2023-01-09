@@ -40,10 +40,11 @@ namespace Movement
 		protected void Move(float deltaTime)
 		{
 			// Motion 101. Apply the rules.
+		
 			Velocity += Acceleration * deltaTime;
 			Position += Velocity * deltaTime;
 			// Reset acceleration
-
+			Acceleration = new Vector2(0,0);
 		}
 
 		protected void AddForce(Vector2 force)
