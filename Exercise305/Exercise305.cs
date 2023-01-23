@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Dynamic;
+using System.Linq;
+using System.Numerics;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Raylib_cs;
 
@@ -14,8 +18,11 @@ namespace Movement
 		private List<Planet> planets;
 		List<Lazer> lazers;
 		List<EnemyLazer> enemylazers;
+		private PoneWins pone;
+		private PtwoWins ptwo;
 
 		Random rand = new Random();
+
 		// constructor + call base constructor
 		public Exercise305(String t) : base(t)
 		{
@@ -26,23 +33,60 @@ namespace Movement
 			AddChild(enemy);
 			lazers = new List<Lazer>();
 			enemylazers = new List<EnemyLazer>();
+			pone = new PoneWins();
+			ptwo = new PtwoWins();
 		}
 
 		// Update is called every frame
 		public override void Update(float deltaTime)
 		{
+			if (!spaceship.IsAlive()) 
+			{
+				AddChild(ptwo);
+				return; 
+			}
+
+			if (!enemy.IsAlive()) 
+			{
+				AddChild(pone);
+				return; 
+			}
+
 			base.Update(deltaTime);
-			
 			HandleInput(deltaTime);
+
+			// loop door lijst met lazers
+			// check distance met player
+			for (int i = enemylazers.Count-1; i >= 0; i--)
+			{
+				if (CalculateDistance(enemylazers[i].Position, spaceship.Position) < 40)
+				{
+					Console.WriteLine("boom");
+					RemoveChild(enemylazers[i]);
+					enemylazers.RemoveAt(i);
+					spaceship.Damage(10);
+				}
+			}
+
+			for (int i = lazers.Count-1; i >= 0; i--)
+			{
+				if (CalculateDistance(lazers[i].Position, enemy.Position) < 40)
+				{
+					Console.WriteLine("boom");
+					RemoveChild(lazers[i]);
+					lazers.RemoveAt(i);
+					enemy.Damage(10);
+				}
+			}
 		}
 
 		private void HandleInput(float deltaTime)
 		{
-			if (Raylib.IsKeyDown(KeyboardKey.KEY_A)) 
+			if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
 			{
 				spaceship.RotateLeft(deltaTime);
 			}
-			if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) 
+			if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
 			{
 				spaceship.RotateRight(deltaTime);
 			}
@@ -86,7 +130,7 @@ namespace Movement
 		private void PlanetMaker()
 		{
 			planets = new List<Planet>();
-			for (int i=0; i<10; i++)
+			for (int i = 0; i < 10; i++)
 			{
 				Planet p = new Planet();
 				planets.Add(p);
@@ -97,6 +141,9 @@ namespace Movement
 			}
 		}
 
-	} // class
-
+		private float CalculateDistance(Vector2 a, Vector2 b)
+		{
+			return Vector2.Distance(a, b);
+		}
+	}
 } // namespace

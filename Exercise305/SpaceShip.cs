@@ -28,13 +28,16 @@ namespace Movement
 		private float rotSpeed;
 		// private float thrustForce;
 		private float thrustForce;
+
+		private int health;
 		// constructor + call base constructor
 		public SpaceShip() : base("resources/spaceship.png")
 		{
-			
 			rotSpeed = (float)Math.PI; // rad/second
 			thrustForce = 100f;
-			Position = new Vector2(Settings.ScreenSize.X / 2, Settings.ScreenSize.Y / 2);
+			Position = new Vector2(Settings.ScreenSize.X / 3, Settings.ScreenSize.Y / 2);
+			maxSpeed = 100f;
+			health = 100;
 		}
 
 		// Update is called every frame
@@ -65,9 +68,23 @@ namespace Movement
 			Acceleration = new Vector2(x, y);
 		}
 
-		public void NoThrust()
+		public void Damage(int amount)
 		{
-			
+			health -= amount;
+		}
+
+		public bool IsAlive()
+		{
+			if (health <= 0)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public void ShowHealth()
+		{
+			Console.WriteLine("P1_HP: " + health);
 		}
 
 		public Lazer Shoot()
