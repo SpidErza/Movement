@@ -29,7 +29,9 @@ namespace Movement
 		// private float thrustForce;
 		private float thrustForce;
 
-		private int health;
+		public int health;
+		public int MaxHealth;
+
 		// constructor + call base constructor
 		public Enemy() : base("resources/Enemy.png")
 		{
@@ -37,7 +39,8 @@ namespace Movement
 			thrustForce = 100f;
 			Position = new Vector2(Settings.ScreenSize.X / 2, Settings.ScreenSize.Y / 2);
 			maxSpeed = 100f;
-			health = 100;
+			MaxHealth = 100;
+			health = MaxHealth;
 		}
 
 		// Update is called every frame
@@ -66,6 +69,13 @@ namespace Movement
 			float x = thrustForce * MathF.Cos((float)(Rotation));
 			float y = thrustForce * MathF.Sin((float)(Rotation));
 			Acceleration = new Vector2(x, y);
+		}
+
+		public void Reverse()
+		{
+			float x = thrustForce * MathF.Cos((float)(Rotation));
+			float y = thrustForce * MathF.Sin((float)(Rotation));
+			Acceleration = new Vector2(-x, -y);
 		}
 
 		public void Damage(int amount)

@@ -20,6 +20,8 @@ namespace Movement
 		List<EnemyLazer> enemylazers;
 		private PoneWins pone;
 		private PtwoWins ptwo;
+		private SpaceShipHP shiphp;
+		private EnemyHP enemyhp;
 
 		Random rand = new Random();
 
@@ -35,6 +37,10 @@ namespace Movement
 			enemylazers = new List<EnemyLazer>();
 			pone = new PoneWins();
 			ptwo = new PtwoWins();
+			shiphp = new SpaceShipHP();
+			AddChild(shiphp);
+			enemyhp = new EnemyHP();
+			AddChild(enemyhp);
 		}
 
 		// Update is called every frame
@@ -43,13 +49,13 @@ namespace Movement
 			if (!spaceship.IsAlive()) 
 			{
 				AddChild(ptwo);
-				return; 
+				return;
 			}
 
 			if (!enemy.IsAlive()) 
 			{
 				AddChild(pone);
-				return; 
+				return;
 			}
 
 			base.Update(deltaTime);
@@ -78,6 +84,8 @@ namespace Movement
 					enemy.Damage(10);
 				}
 			}
+			shiphp.Scale.X = spaceship.health / 10;
+			enemyhp.Scale.X = enemy.health / 10;
 		}
 
 		private void HandleInput(float deltaTime)
@@ -94,7 +102,11 @@ namespace Movement
 			{
 				spaceship.Thrust();
 			}
-			if (Raylib.IsKeyPressed(KeyboardKey.KEY_S))
+			if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
+			{
+				spaceship.Reverse();
+			}
+				if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
 			{
 				Lazer l = spaceship.Shoot();
 				if (l != null)
@@ -116,7 +128,11 @@ namespace Movement
 			{
 				enemy.Thrust();
 			}
-			if (Raylib.IsKeyPressed(KeyboardKey.KEY_DOWN))
+			if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
+			{
+				enemy.Reverse();
+			}
+			if (Raylib.IsKeyPressed(KeyboardKey.KEY_KP_ENTER))
 			{
 				EnemyLazer e = enemy.Shoot();
 				if (e != null)
@@ -130,7 +146,7 @@ namespace Movement
 		private void PlanetMaker()
 		{
 			planets = new List<Planet>();
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < 15; i++)
 			{
 				Planet p = new Planet();
 				planets.Add(p);

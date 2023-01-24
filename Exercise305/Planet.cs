@@ -9,9 +9,9 @@ namespace Movement
 {
     class Planet : SpriteNode
     {
-        public Planet() : base("resources/bigball.png")
+        public Planet() : base("resources/planet.png")
         {
-			
+			Color = Raylib_cs.Color.BLUE;
 		}
 	}
 }
