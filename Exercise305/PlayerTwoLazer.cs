@@ -5,9 +5,9 @@ using System.Numerics;
 
 namespace Movement
 {
-	class EnemyLazer : MoverNode
+	class PlayerTwoLazer : MoverNode
 	{
-		public EnemyLazer() : base("resources/EnemyLazer.png")
+		public PlayerTwoLazer() : base("resources/EnemyLazer.png")
 		{
 
 		}
@@ -15,6 +15,7 @@ namespace Movement
 		public override void Update(float deltaTime)
 		{
 			Move(deltaTime);
+			//WrapEdges();
 		}
     }
 }

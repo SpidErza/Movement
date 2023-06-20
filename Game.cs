@@ -15,9 +15,9 @@ namespace Movement
 		{
 			core = new Core("Movement Exercises");
 			scenes = new List<SceneNode>();
-			
 
-			scenes.Add(new Exercise305("Boreas Bounties - version 0.4"));
+			scenes.Add(new MenuScene("Boreas Bounties - version 2.0"));
+			scenes.Add(new GameScene("Boreas Bounties - version 2.0"));
 		}
 
 		// public methods

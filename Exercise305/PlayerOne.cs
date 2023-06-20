@@ -22,7 +22,7 @@ Methods:
 
 namespace Movement
 {
-	class Enemy : MoverNode
+	class PlayerOne : MoverNode
 	{
 		// your private fields here (rotSpeed, thrustForce)
 		private float rotSpeed;
@@ -31,13 +31,12 @@ namespace Movement
 
 		public int health;
 		public int MaxHealth;
-
 		// constructor + call base constructor
-		public Enemy() : base("resources/Enemy.png")
+		public PlayerOne() : base("resources/spaceship.png")
 		{
 			rotSpeed = (float)Math.PI; // rad/second
 			thrustForce = 100f;
-			Position = new Vector2(Settings.ScreenSize.X / 2, Settings.ScreenSize.Y / 2);
+			Position = new Vector2(300, 400);
 			maxSpeed = 100f;
 			MaxHealth = 100;
 			health = MaxHealth;
@@ -94,20 +93,19 @@ namespace Movement
 
 		public void ShowHealth()
 		{
-			Console.WriteLine("P2_HP: " + health);
+			Console.WriteLine("P1_HP: " + health);
 		}
 
-		public EnemyLazer Shoot()
+		public PlayerOneLazer Shoot()
 		{
-			EnemyLazer e = new EnemyLazer();
-			e.Position.X = this.Position.X + (float)Math.Cos(Rotation);
-			e.Position.Y = this.Position.Y + (float)Math.Sin(Rotation);
-			e.Rotation = Rotation;
-			e.Velocity = new Vector2(1500 * (float)Math.Cos(Rotation), 1500 * (float)Math.Sin(Rotation));
+			PlayerOneLazer l = new PlayerOneLazer();
+			l.Position.X = this.Position.X + (float)Math.Cos(Rotation);
+			l.Position.Y = this.Position.Y + (float)Math.Sin(Rotation);
+			l.Rotation = Rotation;
+			l.Velocity = new Vector2(1500 * (float)Math.Cos(Rotation), 1500 * (float)Math.Sin(Rotation));
 
-			return e;
+			return l;
 		}
-		//public Circle();
 
 	}
 }

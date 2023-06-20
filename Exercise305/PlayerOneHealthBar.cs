@@ -5,11 +5,12 @@ using Raylib_cs; // Color
 
 namespace Movement
 {
-	class SpaceShipHP : SpriteNode
+	class PlayerOneHealthBar : SpriteNode
 	{
-		public SpaceShipHP() : base("resources/health_bar.png")
+		public PlayerOneHealthBar() : base("resources/health_bar.png")
 		{
 			Position = new Vector2(100, 50);
+			//Pivot = new Vector2(0, 0);
 		}
 
 		void Update()

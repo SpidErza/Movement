@@ -5,11 +5,12 @@ using Raylib_cs; // Color
 
 namespace Movement
 {
-	class EnemyHP : SpriteNode
+	class PlayerTwoHealthBar : SpriteNode
 	{
-		public EnemyHP() : base("resources/enemy_health_bar.png")
+		public PlayerTwoHealthBar() : base("resources/enemy_health_bar.png")
 		{
 			Position = new Vector2(100, 70);
+			//Pivot = new Vector2(0, 0);
 		}
 
 		void Update()
