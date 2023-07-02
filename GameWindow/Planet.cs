@@ -11,7 +11,7 @@ namespace Movement
     {
         public Planet() : base("resources/planet.png")
         {
-			Color = Raylib_cs.Color.BLUE;
+			Color = Raylib_cs.Color.VIOLET;
 		}
 	}
 }

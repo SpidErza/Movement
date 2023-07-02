@@ -9,14 +9,9 @@ namespace Movement
 {
 	class MenuButton : SpriteNode
 	{
-		public MenuButton() : base("resources/bigball.png")
+		public MenuButton() : base("resources/Button2.png")
 		{
-			
-		}
 
-		MouseCheck()
-		{
-			if 
 		}
 	}
 }

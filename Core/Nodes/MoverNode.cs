@@ -45,6 +45,7 @@ namespace Movement
 			Position += Velocity * deltaTime;
 			// Reset acceleration
 			Acceleration = new Vector2(0,0);
+			Velocity *= 0.9995f;
 		}
 
 		protected void AddForce(Vector2 force)
@@ -71,19 +72,23 @@ namespace Movement
 			// TODO implement...
 			if (Position.X > scr_width - spr_width / 2)
 			{
-				Velocity.X *= -1;
+				Position.X = scr_width - spr_width / 2;
+				Velocity.X *= -0.9f;
 			}
 			if (Position.X < 0 + spr_width / 2)
 			{
-				Velocity.X *= -1;
+				Position.X = 0 + spr_width / 2;
+				Velocity.X *= -0.9f;
 			}
 			if (Position.Y > scr_height - spr_heigth / 2)
 			{
-				Velocity.Y *= -1;
+				Position.Y = scr_height - spr_heigth / 2;
+				Velocity.Y *= -0.9f;
 			}
 			if (Position.Y < 0 + spr_heigth / 2)
 			{
-				Velocity.Y *= -1;
+				Position.Y = 0 + spr_heigth / 2;
+				Velocity.Y *= -0.9f;
 			}
 		}
 

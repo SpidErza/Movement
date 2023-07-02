@@ -22,7 +22,7 @@ Methods:
 
 namespace Movement
 {
-	class PlayerTwo : MoverNode
+	class PlayerOne : MoverNode
 	{
 		// your private fields here (rotSpeed, thrustForce)
 		private float rotSpeed;
@@ -31,23 +31,24 @@ namespace Movement
 
 		public int health;
 		public int MaxHealth;
-
 		// constructor + call base constructor
-		public PlayerTwo() : base("resources/Enemy.png")
+		public PlayerOne() : base("resources/spaceship.png")
 		{
 			rotSpeed = (float)Math.PI; // rad/second
-			thrustForce = 100f;
-			Position = new Vector2(1000, 400);
-			maxSpeed = 100f;
+			thrustForce = 200f;
+			Position = new Vector2(300, 400);
+			maxSpeed = 50f;
 			MaxHealth = 100;
 			health = MaxHealth;
+			Rotation = Math.PI;
 		}
 
 		// Update is called every frame
 		public override void Update(float deltaTime)
 		{
 			Move(deltaTime);
-			WrapEdges();
+			//WrapEdges();
+			BounceEdges();
 		}
 
 		// your own private methods
@@ -94,20 +95,19 @@ namespace Movement
 
 		public void ShowHealth()
 		{
-			Console.WriteLine("P2_HP: " + health);
+			Console.WriteLine("P1_HP: " + health);
 		}
 
-		public PlayerTwoLazer Shoot()
+		public PlayerOneLazer Shoot()
 		{
-			PlayerTwoLazer e = new PlayerTwoLazer();
-			e.Position.X = this.Position.X + (float)Math.Cos(Rotation);
-			e.Position.Y = this.Position.Y + (float)Math.Sin(Rotation);
-			e.Rotation = Rotation;
-			e.Velocity = new Vector2(1500 * (float)Math.Cos(Rotation), 1500 * (float)Math.Sin(Rotation));
+			PlayerOneLazer l = new PlayerOneLazer();
+			l.Position.X = this.Position.X + (float)Math.Cos(Rotation);
+			l.Position.Y = this.Position.Y + (float)Math.Sin(Rotation);
+			l.Rotation = Rotation;
+			l.Velocity = new Vector2(1500 * (float)Math.Cos(Rotation), 1500 * (float)Math.Sin(Rotation));
 
-			return e;
+			return l;
 		}
-		//public Circle();
 
 	}
 }

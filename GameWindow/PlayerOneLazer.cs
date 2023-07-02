@@ -17,6 +17,7 @@ namespace Movement
 		{
 			Move(deltaTime);
 			//WrapEdges();
+			//BounceEdges();
 		}
     }
 }

@@ -10,6 +10,7 @@ namespace Movement
 			int width = (int)Settings.ScreenSize.X;
 			int height = (int)Settings.ScreenSize.Y;
 			Raylib.InitWindow(width, height, title);
+			Raylib.InitAudioDevice();
 		}
 
 		public bool Run(SceneNode scene)
@@ -17,6 +18,7 @@ namespace Movement
 			if (Raylib.WindowShouldClose())
 			{
 				ResourceManager.Instance.CleanUp();
+				Raylib.CloseAudioDevice();
 				Raylib.CloseWindow();
 				return false;
 			}

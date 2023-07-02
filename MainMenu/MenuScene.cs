@@ -13,6 +13,7 @@ namespace Movement
 	class MenuScene : SceneNode
 	{
 		// private fields
+		private Core core;
 		private List<MenuButton> menubuttons;
 
 		// constructor + call base constructors
@@ -24,7 +25,22 @@ namespace Movement
 		// Update is called every frame
 		public override void Update(float deltaTime)
 		{
-			
+			Vector2 mousepos = Raylib.GetMousePosition();
+
+			for (int i = 0; i < menubuttons.Count; i++)
+			{
+				if (!(mousepos.X >= menubuttons[i].Position.X - menubuttons[i].TextureSize.X / 2 && mousepos.X <= menubuttons[i].Position.X + menubuttons[i].TextureSize.X / 2 && mousepos.Y >= menubuttons[i].Position.Y - menubuttons[i].TextureSize.Y / 2 && mousepos.Y <= menubuttons[i].Position.Y + menubuttons[i].TextureSize.Y / 2))
+				{
+					continue;
+				}
+				if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
+				{
+					MenuButtonWork(i);
+					Console.WriteLine("Works");
+					//Set up a way to change scenes
+					return;
+				}
+			}
 		}
 
 		public void MenuButtons()
@@ -34,23 +50,31 @@ namespace Movement
 			MenuButton start = new MenuButton();
 			menubuttons.Add(start);
 			AddChild(start);
-			start.Position.X = 400;
-			start.Position.Y = 200;
+			start.Position.X = 640;
+			start.Position.Y = 300;
 			start.Color = Raylib_cs.Color.ORANGE;
-
-			MenuButton options = new MenuButton();
-			menubuttons.Add(options);
-			AddChild(options);
-			options.Position.X = 400;
-			options.Position.Y = 300;
-			options.Color = Raylib_cs.Color.BLUE;
+			// specify which scene you want to move to
 
 			MenuButton quit = new MenuButton();
 			menubuttons.Add(quit);
 			AddChild(quit);
-			quit.Position.X = 400;
+			quit.Position.X = 640;
 			quit.Position.Y = 400;
-			quit.Color = Raylib_cs.Color.ORANGE;
+			quit.Color = Raylib_cs.Color.BLUE;
+		}
+
+		private void MenuButtonWork(int i)
+		{
+			switch (i)
+			{
+				case 0:
+
+					break;
+
+				case 1:
+
+					break;
+			}
 		}
 	}
 } // namespace

@@ -13,7 +13,7 @@ namespace Movement
 		// constructor
 		public Game()
 		{
-			core = new Core("Movement Exercises");
+			core = new Core("Boreas Bounties - version 2.0");
 			scenes = new List<SceneNode>();
 
 			scenes.Add(new MenuScene("Boreas Bounties - version 2.0"));
